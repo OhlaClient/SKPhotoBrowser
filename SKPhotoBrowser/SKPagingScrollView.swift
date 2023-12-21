@@ -152,6 +152,12 @@ class SKPagingScrollView: UIScrollView {
             visiblePages.append(page)
             addSubview(page)
             
+            if UIView.appearance().semanticContentAttribute == .forceRightToLeft {
+                page.transform = CGAffineTransform(scaleX: -1, y: 1)
+            } else {
+                page.transform = .identity
+            }
+            
             // if exists caption, insert
             if let captionView: SKCaptionView = createCaptionView(index) {
                 captionView.frame = frameForCaptionView(captionView, index: index)

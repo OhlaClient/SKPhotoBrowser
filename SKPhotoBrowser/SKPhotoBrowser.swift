@@ -114,6 +114,7 @@ open class SKPhotoBrowser: UIViewController {
         configureActionView()
         configurePaginationView()
         configureToolbar()
+        adaptRTLAppearance()
 
         animator.willPresent(self)
     }
@@ -599,6 +600,16 @@ private extension SKPhotoBrowser {
             hideControlsAfterDelay()
         }
         setNeedsStatusBarAppearanceUpdate()
+    }
+    
+    func adaptRTLAppearance() {
+        if UIView.appearance().semanticContentAttribute == .forceRightToLeft {
+            self.view.transform = CGAffineTransform(scaleX: -1, y: 1)
+            self.paginationView.transform = CGAffineTransform(scaleX: -1, y: 1)
+        } else {
+            self.view.transform = .identity
+            self.paginationView.transform = .identity
+        }
     }
 }
 
